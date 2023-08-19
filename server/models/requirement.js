@@ -12,8 +12,8 @@ const requirementSchema = new mongoose.Schema({
   dependency: { type: String, required: false},    
   attachment: [ { type: String, }],
   createdBy: { type: String, required: false},
-  testCase: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TestCase', required: false }],
-  testPlan: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TestPlan', required: false }],
+  testCase: [{ type: String, required: false }],
+  testPlan: [{ type: String, required: false }],
 });
 
 // Define a pre-save hook to generate the auto-incrementing ID with prefix

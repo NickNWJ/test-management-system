@@ -1,6 +1,6 @@
 import Breadcrumb from "../../components/Breadcrumb";
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SuccessDialog from "../UiElements/Success";
 import ErrorDialog from "../UiElements/Error";
 import ConfirmationDialog from "../UiElements/Confirmation";
@@ -25,7 +25,8 @@ const RequirementListPage = ({scrollTop}) => {
   const tableContainerRef = useRef(null);
   const [leftRightScrollClass, setLeftRightScrollClass] 
   = useState("fixed z-888 drop-shadow-lg rounded-full hover:scale-110 hover:text-whiten bg-meta-6 py-2 px-3 mt-2 absolute xl:top-[50%] lg:top-[70%] md:top-[90%]");
-  
+  const navigate = useNavigate();
+
   useLayoutEffect(() => {
     if (scrollTop >= 350) {
       setLeftRightScrollClass(
@@ -122,7 +123,7 @@ const RequirementListPage = ({scrollTop}) => {
       timer = setTimeout(() => {
         if (showSuccessDialog) {
           setShowSuccessDialog(false);  
-          window.location.href = 'http://localhost:5173/requirements';
+          navigate(`http://localhost:5173/requirements`);
         }
         setShowErrorDialog(false);
       }, 1500); // Adjust the timeout duration as needed
