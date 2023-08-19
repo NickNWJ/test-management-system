@@ -12,6 +12,8 @@ import SuccessDialog from '../UiElements/Success';
 
 // color class
 import colorClass from '../../constant/colorClass';
+// platform type class
+import platformTypeClass from '../../constant/platformTypeClass';
 import Loader from '../../common/Loader';
 
 const ApplicationListPage = ({scrollTop}) => {
@@ -31,6 +33,7 @@ const ApplicationListPage = ({scrollTop}) => {
   const tableContainerRef = useRef(null);
   const [leftRightScrollClass, setLeftRightScrollClass] 
   = useState("fixed z-888 drop-shadow-lg rounded-full hover:scale-110 hover:text-whiten bg-meta-6 py-2 px-3 mt-2 absolute xl:top-[50%] lg:top-[70%] md:top-[90%]");
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     if (scrollTop >= 350) {
@@ -155,7 +158,7 @@ const ApplicationListPage = ({scrollTop}) => {
       timer = setTimeout(() => {
         if (showSuccessDialog) {
           setShowSuccessDialog(false);  
-          window.location.href = 'http://localhost:5173/applications';
+          navigate('/applications');
         }
         setShowErrorDialog(false);
       }, 1500); // Adjust the timeout duration as needed
@@ -329,7 +332,13 @@ const ApplicationListPage = ({scrollTop}) => {
                         <td className="whitespace-nowrap px-6 py-0">{application.name}</td>
                         <td className="whitespace-normal px-6 py-0">{application.description}</td>
                         <td className="whitespace-normal px-6 py-0">{application.applicationUrl}</td>
-                        <td className="whitespace-nowrap px-6 py-0">{application.platform}</td>
+                        <td className="whitespace-nowrap px-6 py-0">
+                          <span className={`inline-block p-1.5 uppercase 
+                            rounded-full uppercase`} >
+                              {platformTypeClass.getPlatformTypeClass(application.platform.toLowerCase())}
+                            {application.platform}
+                          </span>
+                        </td>
                         <td className="whitespace-nowrap px-6 py-0">
                           <span className={`inline-block p-1.5 uppercase 
                           rounded-full uppercase ${colorClass.getStatusColorClass(application.status)} last:mr-1`}>
@@ -397,7 +406,7 @@ const ApplicationListPage = ({scrollTop}) => {
           <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
       </button>     
-      
+
       {showSuccessDialog && (
         <SuccessDialog
           message={successMessage}
