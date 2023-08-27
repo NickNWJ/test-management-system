@@ -62,20 +62,21 @@ function App() {
         <Route element={<DefaultLayout scrollTop={scrollTop} setScrollTop={setScrollTop}/>}>
             <Route index element={
               <Suspense fallback={<Loader />}>
-                <RequireAuth />
                 <TestAnalysis />
+                <RequireAuth />
+                
               </Suspense>
                }
              />
-            <Route
-              path="/calendar"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <Calendar />
-                  <RequireAuth />
-                </Suspense>
-              }
-            />
+                  <Route
+                    path="/calendar"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <Calendar />
+                        <RequireAuth />
+                      </Suspense>
+                    }
+                  />
             <Route
               path="/dashboard"
               element={
@@ -281,6 +282,7 @@ function App() {
               element={
                 <Suspense fallback={<Loader />}>
                   <NotFoundPage />
+                  <RequireAuth />
                 </Suspense>
               }
             />
