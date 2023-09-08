@@ -1,0 +1,30 @@
+# Use the official Node.js image as the base image
+FROM node:14
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy only the necessary files and folders needed for the frontend
+COPY package.json /app
+
+COPY . /app
+
+# Install 'concurrently' globally
+RUN npm install -g concurrently
+
+# Install project dependencies for the backend
+RUN npm install
+
+RUN npm install jsonwebtoken --save
+
+# Build the React frontend
+RUN npm run build
+
+# Expose the port on which frontend listens
+EXPOSE 5173
+
+# Expose the port on which backend listens
+EXPOSE 8888
+
+# Start the application using concurrently
+CMD ["npm", "run", "dev"]
