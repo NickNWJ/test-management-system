@@ -98,13 +98,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       </div>
       {/* <!-- SIDEBAR HEADER --> */}
 
-      
-      
-
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
-        
-        
-        
         {/* <!-- Sidebar Menu --> */}
         <nav className="mt-5 py-4 lg:mt-3">
           {/* <!-- Menu Group --> */}
@@ -112,7 +106,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           {/* DASHBOARD */}
           
           {/* <!-- Others Group --> */}
-          <div>
+          <div className="hidden">
             <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
               DASHBOARD
             </h3>
@@ -199,95 +193,97 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             </h3>
             <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- AUT Dashboard --> */}
-              { user.Role === "Project Manager" || user.Role === "Software Developer" 
-                ? <SidebarLinkGroup
-                    activeCondition={pathname.includes('applications')
-                    }
-                  >
-                    {(handleClick, open) => {
-                      return (
-                        <React.Fragment>
-                          <NavLink
-                            to="#"
-                            className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                              (pathname.includes('applications')) &&
-                              'bg-graydark dark:bg-meta-4'
-                            }`}
-                            onClick={(e) => {
-                              e.preventDefault();
-                              sidebarExpanded
-                                ? handleClick()
-                                : setSidebarExpanded(true);
-                            }}
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" 
-                              fill="none" viewBox="0 0 24 24" strokeWidth={1.5} 
-                              stroke="currentColor" className="w-6 h-6">
-                              <path strokeLinecap="round" strokeLinejoin="round"
-                              d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 
-                              3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 
-                              2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 
-                              0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 
-                              2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
-                            </svg>
-                            App Under Test
-                            <svg
-                              className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
-                                open && 'rotate-180'
-                              }`}
-                              width="20"
-                              height="20"
-                              viewBox="0 0 20 20"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M4.41107 6.9107C4.73651 6.58527 5.26414 6.58527 5.58958 6.9107L10.0003 11.3214L14.4111 6.91071C14.7365 6.58527 15.2641 6.58527 15.5896 6.91071C15.915 7.23614 15.915 7.76378 15.5896 8.08922L10.5896 13.0892C10.2641 13.4147 9.73651 13.4147 9.41107 13.0892L4.41107 8.08922C4.08563 7.76378 4.08563 7.23614 4.41107 6.9107Z"
-                                fill=""
-                              />
-                            </svg>
-                          </NavLink>
-                          {/* <!-- Dropdown Menu Start --> */}
-                          <div
-                            className={`translate transform overflow-hidden ${
-                              !open && 'hidden'
-                            }`}
-                          >
-                            <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                              <li>
-                                <NavLink
-                                  to="/applications"
-                                  className={({ isActive }) =>
-                                    'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                    (isActive && '!text-white')
-                                  }
+              { user !== null && user !== undefined
+                  ? user.Role === "Project Manager" || user.Role === "Software Developer" 
+                    ? <SidebarLinkGroup
+                        activeCondition={pathname.includes('applications')
+                        }
+                      >
+                        {(handleClick, open) => {
+                          return (
+                            <React.Fragment>
+                              <NavLink
+                                to="#"
+                                className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                                  (pathname.includes('applications')) &&
+                                  'bg-graydark dark:bg-meta-4'
+                                }`}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  sidebarExpanded
+                                    ? handleClick()
+                                    : setSidebarExpanded(true);
+                                }}
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" 
+                                  fill="none" viewBox="0 0 24 24" strokeWidth={1.5} 
+                                  stroke="currentColor" className="w-6 h-6">
+                                  <path strokeLinecap="round" strokeLinejoin="round"
+                                  d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 
+                                  3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 
+                                  2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 
+                                  0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 
+                                  2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
+                                </svg>
+                                App Under Test
+                                <svg
+                                  className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
+                                    open && 'rotate-180'
+                                  }`}
+                                  width="20"
+                                  height="20"
+                                  viewBox="0 0 20 20"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
                                 >
-                                  Application List
-                                </NavLink>
-                              </li>
-                            </ul>
-                            <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                              <li>
-                                <NavLink
-                                  to="/application/details"
-                                  className={({ isActive }) =>
-                                    'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                    (isActive && '!text-white')
-                                  }
-                                >
-                                  Add Application
-                                </NavLink>
-                              </li>
-                            </ul>
-                          </div>
-                          {/* <!-- Dropdown Menu End --> */}
-                        </React.Fragment>
-                      );
-                    }}
-                  </SidebarLinkGroup>
-                : null
+                                  <path
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    d="M4.41107 6.9107C4.73651 6.58527 5.26414 6.58527 5.58958 6.9107L10.0003 11.3214L14.4111 6.91071C14.7365 6.58527 15.2641 6.58527 15.5896 6.91071C15.915 7.23614 15.915 7.76378 15.5896 8.08922L10.5896 13.0892C10.2641 13.4147 9.73651 13.4147 9.41107 13.0892L4.41107 8.08922C4.08563 7.76378 4.08563 7.23614 4.41107 6.9107Z"
+                                    fill=""
+                                  />
+                                </svg>
+                              </NavLink>
+                              {/* <!-- Dropdown Menu Start --> */}
+                              <div
+                                className={`translate transform overflow-hidden ${
+                                  !open && 'hidden'
+                                }`}
+                              >
+                                <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                                  <li>
+                                    <NavLink
+                                      to="/applications"
+                                      className={({ isActive }) =>
+                                        'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                        (isActive && '!text-white')
+                                      }
+                                    >
+                                      Application List
+                                    </NavLink>
+                                  </li>
+                                </ul>
+                                {/* <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                                  <li>
+                                    <NavLink
+                                      to="/application/details"
+                                      className={({ isActive }) =>
+                                        'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                        (isActive && '!text-white')
+                                      }
+                                    >
+                                      Add Application
+                                    </NavLink>
+                                  </li>
+                                </ul> */}
+                              </div>
+                              {/* <!-- Dropdown Menu End --> */}
+                            </React.Fragment>
+                          );
+                        }}
+                      </SidebarLinkGroup>
+                    : null
+                  : null
               } 
 
 
@@ -366,7 +362,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             </NavLink>
                           </li>
                         </ul>
-                        <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                        {/* <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                           <li>
                             <NavLink
                               to="/requirement/details"
@@ -378,7 +374,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Add Requirement
                             </NavLink>
                           </li>
-                        </ul>
+                        </ul> */}
                       </div>
                       {/* <!-- Dropdown Menu End --> */}
                     </React.Fragment>
@@ -514,7 +510,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             </NavLink>
                           </li>
                         </ul>
-                        <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                        {/* <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                           <li>
                             <NavLink
                               to="/test/test-run/details"
@@ -526,7 +522,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Execute Test 
                             </NavLink>
                           </li>
-                        </ul>
+                        </ul> */}
                         <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                           <li>
                             <NavLink
@@ -540,7 +536,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             </NavLink>
                           </li>
                         </ul>
-                        <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                        {/* <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                           <li>
                             <NavLink
                               to="/test/test-report/details"
@@ -552,7 +548,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Import Test Report
                             </NavLink>
                           </li>
-                        </ul>
+                        </ul> */}
                       </div>
                       
                       {/* <!-- Dropdown Menu End --> */}
@@ -692,115 +688,117 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           </div>
 
           {/* <!-- Others Group --> */}
-          { user.Role === "Project Manager" && 
-            <div>
-            <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
-              OTHERS
-            </h3>
+          { user !== undefined && user !== null 
+              ? user.Role === "Project Manager" && 
+                <div>
+                <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
+                  OTHERS
+                </h3>
 
-            <ul className="mb-6 flex flex-col gap-1.5">
-              {/* <!-- User --> */}
-              <SidebarLinkGroup
-                activeCondition={pathname.includes('user')}
-              >
-                {(handleClick, open) => {
-                  return (
-                    <React.Fragment>
-                      <NavLink
-                        to="#"
-                        className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                          (pathname.includes('users')) &&
-                          'bg-graydark dark:bg-meta-4'
-                        }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded
-                            ? handleClick()
-                            : setSidebarExpanded(true);
-                        }}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" 
-                        fill="none" viewBox="0 0 24 24" strokeWidth={1.5} 
-                        stroke="currentColor" className="w-6 h-6">
-                          <path strokeLinecap="round" strokeLinejoin="round" 
-                          d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 
-                          0 00-4.682-2.72m.94 3.198l.001.031c0 
-                          .225-.012.447-.037.666A11.944 11.944 
-                          0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 
-                          6.062 0 016 18.719m12 0a5.971 
-                          5.971 0 00-.941-3.197m0 0A5.995 
-                          5.995 0 0012 12.75a5.995 
-                          5.995 0 00-5.058 2.772m0 
-                          0a3 3 0 00-4.681 2.72 
-                          8.986 8.986 0 003.74.477m.94-3.197a5.971 
-                          5.971 0 00-.94 3.197M15 6.75a3 
-                          3 0 11-6 0 3 3 
-                          0 016 0zm6 3a2.25 2.25 
-                          0 11-4.5 0 2.25 2.25 
-                          0 014.5 0zm-13.5 0a2.25 
-                          2.25 0 11-4.5 0 2.25 
-                          2.25 0 014.5 0z" />
-                        </svg>
+                <ul className="mb-6 flex flex-col gap-1.5">
+                  {/* <!-- User --> */}
+                  <SidebarLinkGroup
+                    activeCondition={pathname.includes('user')}
+                  >
+                    {(handleClick, open) => {
+                      return (
+                        <React.Fragment>
+                          <NavLink
+                            to="#"
+                            className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                              (pathname.includes('users')) &&
+                              'bg-graydark dark:bg-meta-4'
+                            }`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              sidebarExpanded
+                                ? handleClick()
+                                : setSidebarExpanded(true);
+                            }}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                            fill="none" viewBox="0 0 24 24" strokeWidth={1.5} 
+                            stroke="currentColor" className="w-6 h-6">
+                              <path strokeLinecap="round" strokeLinejoin="round" 
+                              d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 
+                              0 00-4.682-2.72m.94 3.198l.001.031c0 
+                              .225-.012.447-.037.666A11.944 11.944 
+                              0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 
+                              6.062 0 016 18.719m12 0a5.971 
+                              5.971 0 00-.941-3.197m0 0A5.995 
+                              5.995 0 0012 12.75a5.995 
+                              5.995 0 00-5.058 2.772m0 
+                              0a3 3 0 00-4.681 2.72 
+                              8.986 8.986 0 003.74.477m.94-3.197a5.971 
+                              5.971 0 00-.94 3.197M15 6.75a3 
+                              3 0 11-6 0 3 3 
+                              0 016 0zm6 3a2.25 2.25 
+                              0 11-4.5 0 2.25 2.25 
+                              0 014.5 0zm-13.5 0a2.25 
+                              2.25 0 11-4.5 0 2.25 
+                              2.25 0 014.5 0z" />
+                            </svg>
 
-                        Users
-                        <svg
-                          className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
-                            open && 'rotate-180'
-                          }`}
-                          width="20"
-                          height="20"
-                          viewBox="0 0 20 20"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M4.41107 6.9107C4.73651 6.58527 5.26414 6.58527 5.58958 6.9107L10.0003 11.3214L14.4111 6.91071C14.7365 6.58527 15.2641 6.58527 15.5896 6.91071C15.915 7.23614 15.915 7.76378 15.5896 8.08922L10.5896 13.0892C10.2641 13.4147 9.73651 13.4147 9.41107 13.0892L4.41107 8.08922C4.08563 7.76378 4.08563 7.23614 4.41107 6.9107Z"
-                            fill=""
-                          />
-                        </svg>
-                      </NavLink>
-                      {/* <!-- Dropdown Menu Start --> */}
-                      <div
-                        className={`translate transform overflow-hidden ${
-                          !open && 'hidden'
-                        }`}
-                      >
-                        <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
-                              to="/users"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
+                            Users
+                            <svg
+                              className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
+                                open && 'rotate-180'
+                              }`}
+                              width="20"
+                              height="20"
+                              viewBox="0 0 20 20"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
                             >
-                              User List
-                            </NavLink>
-                          </li>
-                        </ul>
-                        <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
-                              to="/user/details"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              Add User
-                            </NavLink>
-                          </li>
-                        </ul>
-                      </div>
-                      {/* <!-- Dropdown Menu End --> */}
-                    </React.Fragment>
-                  );
-                }}
-              </SidebarLinkGroup>
-            </ul>
-          </div>
+                              <path
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                d="M4.41107 6.9107C4.73651 6.58527 5.26414 6.58527 5.58958 6.9107L10.0003 11.3214L14.4111 6.91071C14.7365 6.58527 15.2641 6.58527 15.5896 6.91071C15.915 7.23614 15.915 7.76378 15.5896 8.08922L10.5896 13.0892C10.2641 13.4147 9.73651 13.4147 9.41107 13.0892L4.41107 8.08922C4.08563 7.76378 4.08563 7.23614 4.41107 6.9107Z"
+                                fill=""
+                              />
+                            </svg>
+                          </NavLink>
+                          {/* <!-- Dropdown Menu Start --> */}
+                          <div
+                            className={`translate transform overflow-hidden ${
+                              !open && 'hidden'
+                            }`}
+                          >
+                            <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                              <li>
+                                <NavLink
+                                  to="/users"
+                                  className={({ isActive }) =>
+                                    'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                    (isActive && '!text-white')
+                                  }
+                                >
+                                  User List
+                                </NavLink>
+                              </li>
+                            </ul>
+                            <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                              <li>
+                                <NavLink
+                                  to="/user/details"
+                                  className={({ isActive }) =>
+                                    'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                    (isActive && '!text-white')
+                                  }
+                                >
+                                  Add User
+                                </NavLink>
+                              </li>
+                            </ul>
+                          </div>
+                          {/* <!-- Dropdown Menu End --> */}
+                        </React.Fragment>
+                      );
+                    }}
+                  </SidebarLinkGroup>
+                </ul>
+                </div>
+              : ""
           }
 
         </nav>
