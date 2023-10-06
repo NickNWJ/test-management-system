@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import { useLocation, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import moment from "moment";
@@ -47,11 +47,10 @@ export const RequireAuth = () => {
   const { user, token } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-
   useEffect(() => {
     if (!user) {
       console.log("not authenticated!");
-      window.location.href = "/auth/signin";
+      navigate("/auth/signin");
     } else {
       if (user) {
         if (user.Role === "Tester" && window.location.href.includes("application")) {
